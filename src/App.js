@@ -5,9 +5,22 @@ import api from "./services/api";
 
 import "./styles.css";
 
+
+
+
+
 function App() {
    
   const [repositories, setRepositoies] = useState([]);
+
+  // useEffet(() => {
+  //   api.get('repositories').then(response => {
+  //     setRepositoies(response.data);
+  //   });
+  // }, []);
+  
+
+ 
 
   async function handleAddRepository() {
     const response = await api.post('repositories', {
@@ -23,13 +36,15 @@ function App() {
   }
 
   async function handleRemoveRepository(id) {
-    await api.delete(`repositories/${id}`)
 
-    const response = await api.get('repositories');
+    console.log(id);
+    await api.delete(`repositories/${id}`);
+    
+     const response = await api.get('repositories');
 
     const repositorio = response.data;
 
-    setRepositoies([... repositories, repositorio]);
+     setRepositoies([... repositories, repositorio]);
 
   }
 
