@@ -1,26 +1,17 @@
 import React, { useState, useEffet } from "react";
 import api from "./services/api";
-
-
-
 import "./styles.css";
-
-
 
 
 
 function App() {
    
-  const [repositories, setRepositoies] = useState([]);
-
-  // useEffet(() => {
-  //   api.get('repositories').then(response => {
-  //     setRepositoies(response.data);
-  //   });
-  // }, []);
-  
+  const [repositories, setRepositories] = useState([]);
 
  
+
+
+
 
   async function handleAddRepository() {
     const response = await api.post('repositories', {
@@ -31,20 +22,20 @@ function App() {
 
     const repositorio = response.data;
 
-    setRepositoies([... repositories, repositorio])
+    setRepositories([... repositories, repositorio])
 
   }
 
   async function handleRemoveRepository(id) {
 
     console.log(id);
-    await api.delete(`repositories/${id}`);
+     await api.delete(`repositories/${id}`);
     
      const response = await api.get('repositories');
 
-    const repositorio = response.data;
+     const Getrepositorios = response.data;  
 
-     setRepositoies([... repositories, repositorio]);
+     setRepositories(Getrepositorios);
 
   }
 
